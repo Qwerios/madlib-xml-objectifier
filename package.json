@@ -1,0 +1,20 @@
+{
+  "name": "madlib-xml-objectifier",
+  "version": "0.1.0",
+  "description": "Turns XML DOM level 2 into a JavaScript object",
+  "main": "lib/objectifier.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://stash.marviq.com/scm/MAD/xml-objectifier.git"
+  },
+  "keywords": [
+    "madlib",
+    "xml",
+    "json"
+  ],
+  "author": "Mark Doeswijk",
+  "license": "BSD"
+}
