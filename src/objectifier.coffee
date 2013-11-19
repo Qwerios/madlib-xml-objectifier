@@ -1,17 +1,14 @@
 ( ( factory ) ->
     if typeof exports is "object"
         module.exports = factory(
-            require "madLib/console"
             require "underscore"
         )
-
     else if typeof define is "function" and define.amd
         define( [
-            "madLib/console"
             "underscore"
         ], factory )
 
-)( ( console, _ ) ->
+)( ( _ ) ->
     # This method take an XML DOM Level 2 document and converts it to an
     # object representation with minimal loss of data
     #
