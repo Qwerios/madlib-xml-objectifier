@@ -22,7 +22,6 @@
     "coffee-script": ">= 1.3"
   },
   "dependencies": {
-    "underscore": "~1.5.2",
-    "madlib-console": "~0.1.0"
+    "underscore": "~1.5.2"
   }
 }
