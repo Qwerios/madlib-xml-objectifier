@@ -1,15 +1,13 @@
 {
   "name": "madlib-xml-objectifier",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "Turns XML DOM level 2 into a JavaScript object",
   "main": "lib/objectifier.js",
-  "scripts":
-  {
+  "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "prepublish": "command -v grunt >/dev/null 2>&1 && grunt || { echo >&2 'Grunt is not installed'; }"
   },
-  "repository":
-  {
+  "repository": {
     "type": "git",
     "url": "https://stash.marviq.com/scm/MAD/xml-objectifier.git"
   },
@@ -18,21 +16,18 @@
     "xml",
     "json"
   ],
-  "author":
-  {
+  "author": {
     "name": "Mark Doeswijk",
     "email": "mark.doeswijk@marviq.com",
     "url": "https://github.com/Marviq"
   },
   "license": "BSD",
-  "devDependencies":
-  {
+  "devDependencies": {
     "grunt-contrib-watch": "~0.3.1",
     "grunt-contrib-coffee": "~0.6.0",
     "grunt": "~0.4.1"
   },
-  "dependencies":
-  {
+  "dependencies": {
     "underscore": "~1.5.2"
   }
 }
