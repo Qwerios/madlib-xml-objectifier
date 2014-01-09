@@ -1,6 +1,6 @@
 # madlib-xml-objectifier
 
-## Sinopsis
+## synopsis
 A converter utility to turn an XML Document (DOM level 2) into a JavaScript object.
 
 ## acknowledgments
