@@ -62,7 +62,7 @@
 
         # Add attributes if present
         #
-        if xmlNode.hasAttributes()
+        if xmlNode.attributes.length > 0
             switch mode
                 when "strict", "smart"
                     objNode.$a = {}
