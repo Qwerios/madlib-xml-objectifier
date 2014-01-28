@@ -13,7 +13,6 @@
     # object representation with minimal loss of data
     #
     documentToObject = ( xmlDocument, mode = "strict", smartHints = [] ) ->
-
         rootNode = xmlDocument.documentElement
 
         # Return object version of the document
@@ -64,7 +63,7 @@
         #
         if xmlNode.attributes.length > 0
             switch mode
-                when "strict", "smart"
+                when "strict"
                     objNode.$a = {}
 
                     for i in [ 0...xmlNode.attributes.length ]
@@ -73,8 +72,17 @@
                         objNode.$a[ attribute.localName ] =
                             $t:     attribute.nodeValue
 
+                        # Strict mode is the only mode that support namespaces on
+                        # attributes
+                        #
                         objNode.$a[ attribute.localName ].$ns = attribute.prefix if attribute.prefix
 
+                when "smart"
+                    objNode.$a = {}
+
+                    for i in [ 0...xmlNode.attributes.length ]
+                        attribute = xmlNode.attributes.item( i )
+                        objNode.$a[ attribute.localName ] = attribute.nodeValue
 
                 when "minimal"
                     # Add attributes directly to the node with minimal fuss
@@ -104,24 +112,21 @@
                                 nodeName = childNode.nodeName
 
                                 if not objNode[ nodeName ]?
-                                    if mode is "smart"
-                                        # This is where we try to get clever
-                                        # If the child node name is a plural of the
-                                        # parent it is likely a collection.
-                                        # Alternatively if the nodeName exists in the
-                                        # smartHints array it will also be an array by default
-                                        #
-                                        parentName = xmlNode.localName
+                                    # This is where we try to get clever
+                                    # If the child node name is a plural of the
+                                    # parent it is likely a collection.
+                                    # Alternatively if the nodeName exists in the
+                                    # smartHints array it will also be an array by default
+                                    #
+                                    parentName = xmlNode.localName
 
-                                        # Check smartHints first and if that fails try a few known plurals
-                                        # In the future it might be prudent to add language sensitivity to smart mode
-                                        # Different languages will have different ways to do plurals
-                                        #
-                                        if _.indexOf( smartHints, nodeName ) is not -1 or nodeName + "s" is parentName or nodeName + "en" is parentName
-                                            objNode[ nodeName ] = [] if not objNode[ nodeName ]?
-                                            objNode[ nodeName ].push( nodeToObject( childNode, mode, smartHints ) )
-                                        else
-                                            objNode[ nodeName ] = nodeToObject( childNode, mode, smartHints )
+                                    # Check smartHints first and if that fails try a few known plurals
+                                    # In the future it might be prudent to add language sensitivity to smart mode
+                                    # Different languages will have different ways to do plurals
+                                    #
+                                    if _.indexOf( smartHints, nodeName ) isnt -1 or nodeName + "s" is parentName or nodeName + "en" is parentName
+                                        objNode[ nodeName ] = [] if not objNode[ nodeName ]?
+                                        objNode[ nodeName ].push( nodeToObject( childNode, mode, smartHints ) )
                                     else
                                         objNode[ nodeName ] = nodeToObject( childNode, mode, smartHints )
 

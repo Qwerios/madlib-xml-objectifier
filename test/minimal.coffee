@@ -18,18 +18,18 @@ xmlDoc = xmldom.parse( xmlString )
 
 # Convert the DOM
 #
-xmlObject = objectifier.documentToObject( xmlDoc, "strict" )
+xmlObject = objectifier.documentToObject( xmlDoc, "minimal" )
 # console.log( JSON.stringify( xmlObject, null, " " ) )
 
-describe( "Objectifier [strict]", () ->
+describe( "Objectifier [minimal]", () ->
     describe( "#documentToObject()", () ->
 
         it( "Attribute should be set", () ->
-            chai.expect( objectUtils.getValue( "authenticateUser.request.0.$a.example.$t", xmlObject ) ).to.eql( "yes" )
+            chai.expect( objectUtils.getValue( "authenticateUser.request.example", xmlObject ) ).to.eql( "yes" )
         )
 
         it( "Tag should contain text", () ->
-            chai.expect( objectUtils.getValue( "authenticateUser.request.0.username.0.$t", xmlObject ) ).to.eql( "foo" )
+            chai.expect( objectUtils.getValue( "authenticateUser.request.username", xmlObject ) ).to.eql( "foo" )
         )
     )
 )
