@@ -163,6 +163,11 @@
             if xmlNode.childNodes.length is 1 and objNode.$t?
                 objNode = objNode.$t
 
+            # Check if the node is an empty object
+            #
+            if _.isEmpty( objNode )
+                objNode = ""
+
 
         return objNode
 

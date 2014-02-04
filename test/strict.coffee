@@ -11,6 +11,7 @@ xmlString   = """
         <ControlParameters>
             <GetContracts>true</GetContracts>
         </ControlParameters>
+        <emptyTag/>
     </request>
 </authenticateUser>
 """
