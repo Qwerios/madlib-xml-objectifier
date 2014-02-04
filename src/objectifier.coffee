@@ -166,7 +166,7 @@
             # Check if the node is an empty object
             #
             if _.isEmpty( objNode )
-                objNode = ""
+                objNode = null
 
 
         return objNode
