@@ -1,6 +1,6 @@
 {
   "name": "madlib-xml-objectifier",
-  "version": "0.1.4",
+  "version": "0.1.5",
   "description": "Turns XML DOM level 2 into a JavaScript object",
   "main": "lib/objectifier.js",
   "scripts": {
