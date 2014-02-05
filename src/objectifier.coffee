@@ -18,8 +18,15 @@
         # Return object version of the document
         #
         objDocument = {}
-        nodeName    = rootNode.localName
-        nodeName    = rootNode.nodeName if mode is "minimal"
+
+        if rootNode.localName?
+            nodeName    = rootNode.localName or rootNode.tagName
+            nodeName    = rootNode.nodeName if mode is "minimal"
+        else
+            # localName is not supported below IE9.
+            # Fall back to tagName but purge name-space
+            #
+            nodeName    = rootNode.tagName.replace( /^.*?:/, '' )
 
         objDocument[ rootNode.localName ] = nodeToObject( rootNode, mode, smartHints )
 
@@ -31,13 +38,13 @@
     # minimal
     #
     # Strict is a fully reversible and consistent approach. Every tag will always
-    # be an array. Tag values are always in $t and namespaces are separated from
+    # be an array. Tag values are always in $t and name-spaces are separated from
     # the node names and put in $ns
     #
     # Smart mode is almost the same as strict but it tries to prevent every tag
     # from becoming an array. It tries to detect plurals in tag names and it can
     # be fed a list of tag names that are always collections. Smart mode will still
-    # place all text in $t and attributes in $a. Namespace will be removed and
+    # place all text in $t and attributes in $a. Name-space will be removed and
     # placed in $ns.
     #
     # Minimal is a non reversible brief representation of the XML.
@@ -72,7 +79,7 @@
                         objNode.$a[ attribute.localName ] =
                             $t:     attribute.nodeValue
 
-                        # Strict mode is the only mode that support namespaces on
+                        # Strict mode is the only mode that support name-spaces on
                         # attributes
                         #
                         objNode.$a[ attribute.localName ].$ns = attribute.prefix if attribute.prefix
