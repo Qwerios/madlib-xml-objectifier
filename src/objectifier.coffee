@@ -9,6 +9,19 @@
         ], factory )
 
 )( ( _ ) ->
+
+    getNodeName = ( node ) ->
+        # localName is not supported below IE9.
+        # Fall back to tagName but purge name-space
+        #
+        node.localName or node.tagName.replace( /^.*?:/, '' )
+
+    getAttributeName = ( attr ) ->
+        # localName is not supported below IE9.
+        # Fall back to name but purge name-space
+        #
+        attr.localName or attr.name.replace( /^.*?:/, '' )
+
     # This method take an XML DOM Level 2 document and converts it to an
     # object representation with minimal loss of data
     #
@@ -19,16 +32,10 @@
         #
         objDocument = {}
 
-        if rootNode.localName?
-            nodeName    = rootNode.localName or rootNode.tagName
-            nodeName    = rootNode.nodeName if mode is "minimal"
-        else
-            # localName is not supported below IE9.
-            # Fall back to tagName but purge name-space
-            #
-            nodeName    = rootNode.tagName.replace( /^.*?:/, '' )
+        nodeName = getNodeName( rootNode )
+        nodeName = rootNode.nodeName  if mode is "minimal"
 
-        objDocument[ rootNode.localName ] = nodeToObject( rootNode, mode, smartHints )
+        objDocument[ nodeName ] = nodeToObject( rootNode, mode, smartHints )
 
         return objDocument
 
@@ -74,21 +81,24 @@
                     objNode.$a = {}
 
                     for i in [ 0...xmlNode.attributes.length ]
-                        attribute = xmlNode.attributes.item( i )
+                        attribute     = xmlNode.attributes.item( i )
+                        attributeName = getAttributeName( attribute )
 
-                        objNode.$a[ attribute.localName ] =
+                        objNode.$a[ attributeName ] =
                             $t:     attribute.nodeValue
 
                         # Strict mode is the only mode that support name-spaces on
                         # attributes
                         #
-                        objNode.$a[ attribute.localName ].$ns = attribute.prefix if attribute.prefix
+                        objNode.$a[ attributeName ].$ns = attribute.prefix if attribute.prefix
 
                 when "smart"
                     objNode.$a = {}
 
                     for i in [ 0...xmlNode.attributes.length ]
-                        attribute = xmlNode.attributes.item( i )
+                        attribute     = xmlNode.attributes.item( i )
+                        attributeName = getAttributeName( attribute )
+
                         objNode.$a[ attribute.localName ] = attribute.nodeValue
 
                 when "minimal"
@@ -112,7 +122,7 @@
                 #
                 switch childNode.nodeType
                     when 1 # ELEMENT_NODE
-                        nodeName = childNode.localName
+                        nodeName = getNodeName( childNode )
 
                         switch mode
                             when "minimal", "smart"
@@ -125,7 +135,7 @@
                                     # Alternatively if the nodeName exists in the
                                     # smartHints array it will also be an array by default
                                     #
-                                    parentName = xmlNode.localName
+                                    parentName = getNodeName( xmlNode )
 
                                     # Check smartHints first and if that fails try a few known plurals
                                     # In the future it might be prudent to add language sensitivity to smart mode
