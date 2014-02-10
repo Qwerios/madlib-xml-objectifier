@@ -18,9 +18,9 @@
 
     getAttributeName = ( attr ) ->
         # localName is not supported below IE9.
-        # Fall back to name but purge name-space
+        # Fall back to baseName or just name but purge name-space
         #
-        attr.localName or attr.name.replace( /^.*?:/, '' )
+        attr.localName or attr.baseName or attr.name.replace( /^.*?:/, '' )
 
     # This method take an XML DOM Level 2 document and converts it to an
     # object representation with minimal loss of data
@@ -85,7 +85,7 @@
                         attributeName = getAttributeName( attribute )
 
                         objNode.$a[ attributeName ] =
-                            $t:     attribute.nodeValue
+                            $t:     attribute.value
 
                         # Strict mode is the only mode that support name-spaces on
                         # attributes
@@ -99,7 +99,7 @@
                         attribute     = xmlNode.attributes.item( i )
                         attributeName = getAttributeName( attribute )
 
-                        objNode.$a[ attribute.localName ] = attribute.nodeValue
+                        objNode.$a[ attributeName ] = attribute.value
 
                 when "minimal"
                     # Add attributes directly to the node with minimal fuss
@@ -108,7 +108,7 @@
                     #
                     for i in [ 0...xmlNode.attributes.length ]
                         attribute = xmlNode.attributes.item( i )
-                        objNode[ attribute.nodeName ] = attribute.nodeValue
+                        objNode[ attribute.nodeName ] = attribute.value
 
         # Add child nodes if present
         #
