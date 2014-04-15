@@ -51,8 +51,7 @@
     # Smart mode is almost the same as strict but it tries to prevent every tag
     # from becoming an array. It tries to detect plurals in tag names and it can
     # be fed a list of tag names that are always collections. Smart mode will still
-    # place all text in $t and attributes in $a. Name-space will be removed and
-    # placed in $ns.
+    # place all text in $t and attributes in $a.
     #
     # Minimal is a non reversible brief representation of the XML.
     # In this mode it will create objects for single nodes and will ignore names spaces
@@ -103,7 +102,7 @@
 
                 when "minimal"
                     # Add attributes directly to the node with minimal fuss
-                    # This can cause a potential conflict if an attribute exists
+                    # This can cause a potential conflicts if an attribute exists
                     # with the same name as a child node (!!)
                     #
                     for i in [ 0...xmlNode.attributes.length ]
@@ -188,7 +187,41 @@
 
         return objNode
 
+    ###*
+    #   The XML objectifier is tasked with turning a W3 DOM Document into a usable
+    #   JavaScript object.
+    #
+    #   @author     mdoeswijk
+    #   @module     xmlObjectifier
+    #   @version    0.1
+    ###
     xmlObjectifier =
+
+        ###*
+        #   Turns the provided XML DOM document into an object representation.
+        #   Supports 3 modes with varying levels of verbosity.
+        #
+        #   @function documentToObject
+        #   @param {DOM Document}        xmlDocument    A W3 DOM Level 2 document
+        #   @param {String}             [mode]          The conversion mode to use. One of 'strict', 'smart' or 'minimal'
+        #   @param {Array of Strings}   [smartHints]    An array of tag names that should always be presented as an array for 'smart' mode conversion
+        #
+        #   @return {Object}   Object representation of the XML Document
+        #
+        ###
         documentToObject: documentToObject
+
+        ###*
+        #   Turns the provided XML DOM Node into an object representation.
+        #   Supports 3 modes with varying levels of verbosity.
+        #
+        #   @function nodeToObject
+        #   @param {DOM Node}            xmlNode        A W3 DOM Level 2 node
+        #   @param {String}             [mode]          The conversion mode to use. One of 'strict', 'smart' or 'minimal'
+        #   @param {Array of Strings}   [smartHints]    An array of tag names that should always be presented as an array for 'smart' mode conversion
+        #
+        #   @return {Object}   Object representation of the XML Node
+        #
+        ###
         nodeToObject:     nodeToObject
 )
