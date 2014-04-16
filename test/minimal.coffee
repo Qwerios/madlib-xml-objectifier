@@ -12,6 +12,7 @@ xmlString   = """
             <GetContracts>true</GetContracts>
         </ControlParameters>
         <emptyTag/>
+        <minimalTag withAttribute="yes">Test</minimalTag>
     </request>
 </authenticateUser>
 """
@@ -31,6 +32,10 @@ describe( "Objectifier [minimal]", () ->
 
         it( "Tag should contain text", () ->
             chai.expect( objectUtils.getValue( "authenticateUser.request.username", xmlObject ) ).to.eql( "foo" )
+        )
+
+        it( "Mixed tag should contain text in $t", () ->
+            chai.expect( objectUtils.getValue( "authenticateUser.request.minimalTag.$t", xmlObject ) ).to.eql( "Test" )
         )
     )
 )

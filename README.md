@@ -18,7 +18,9 @@ Currently madLib is focused on supporting the following platforms:
 
 
 ## installation
+```bash
 npm install madlib-xml-objectifier
+```
 
 
 ## usage
@@ -118,6 +120,29 @@ With the following example XML output would look like this:
         "books": {
             "foo": "bar",
             "book": "An example book"
+        }
+    }
+}
+```
+
+Beware that when you are using minimal mode and you have a tag with both text and attributes you will see the $t again:
+
+```xml
+<example>
+    <books>
+        <book isbn="12345">An example book</book>
+    </books>
+</example>
+```
+
+```javascript
+{
+    "example": {
+        "books": {
+            "book": {
+                "$t": "An example book",
+                "isbn": "12345"
+            }
         }
     }
 }

@@ -176,14 +176,21 @@
         if mode is "minimal" or mode is "smart"
             # Check if the node only contains text
             #
-            if xmlNode.childNodes.length is 1 and objNode.$t?
-                objNode = objNode.$t
+            if mode is "minimal"
+                # Because minimal mode pushed the attributes into the node we also
+                # need to take the attributes array length into account
+                #
+                if xmlNode.childNodes.length is 1 and xmlNode.attributes.length is 0  and objNode.$t?
+                    objNode = objNode.$t
+
+            else
+                if xmlNode.childNodes.length is 1 and objNode.$t?
+                    objNode = objNode.$t
 
             # Check if the node is an empty object
             #
             if _.isEmpty( objNode )
                 objNode = null
-
 
         return objNode
 
