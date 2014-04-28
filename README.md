@@ -1,4 +1,8 @@
-# madlib-xml-objectifier  [![Build Status](https://travis-ci.org/Qwerios/madlib-xml-objectifier.svg?branch=master)](https://travis-ci.org/Qwerios/madlib-xml-objectifier)
+# madlib-xml-objectifier
+[![Build Status](https://travis-ci.org/Qwerios/madlib-xml-objectifier.svg?branch=master)](https://travis-ci.org/Qwerios/madlib-xml-objectifier) [![NPM version](https://badge.fury.io/js/madlib-xml-objectifier.png)](http://badge.fury.io/js/madlib-xml-objectifier) [![Built with Grunt](https://cdn.gruntjs.com/builtwith.png)](http://gruntjs.com/)
+
+[![Npm Downloads](https://nodei.co/npm/madlib-xml-objectifier.png?downloads=true&stars=true)](https://nodei.co/npm/madlib-xml-objectifier.png?downloads=true&stars=true)
+
 A converter utility to turn an XML Document (DOM level 2) into a JavaScript object.
 
 
