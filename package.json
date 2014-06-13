@@ -23,16 +23,16 @@
   },
   "license": "BSD",
   "devDependencies": {
-    "grunt-contrib-watch": "~0.3.1",
-    "grunt-contrib-coffee": "~0.6.0",
-    "grunt": "~0.4.1",
-    "coffee-script": "~1.6.3",
-    "chai": "~1.8.1",
-    "grunt-mocha-test": "~0.8.2",
-    "madlib-xmldom": "~0.1.1",
-    "madlib-object-utils": "~0.1.2"
+    "grunt-contrib-watch": "~0.6.1",
+    "grunt-contrib-coffee": "~0.10.1",
+    "grunt": "~0.4.5",
+    "coffee-script": "~1.7.1",
+    "chai": "~1.9.1",
+    "grunt-mocha-test": "~0.11.0",
+    "madlib-xmldom": "~0.1.2",
+    "madlib-object-utils": "~0.1.5"
   },
   "dependencies": {
-    "underscore": "~1.5.2"
+    "underscore": "~1.6.0"
   }
 }
