@@ -39,7 +39,7 @@ You might want to look at the following other madlib modules to use together wit
 
 #### documentToObject
 ```javascript
-var xmldom      = require( "madlib-xmldom"      );
+var xmldom      = require( "madlib-xmldom"          );
 var objectifier = require( "madlib-xml-objectifier" );
 
 var xmlDoc    = xmldom.parse( "<example><books><book>An example book</book></books></example>" );
